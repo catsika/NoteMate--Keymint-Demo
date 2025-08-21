@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input { @apply border rounded px-2 py-1 w-full text-sm bg-white dark:bg-gray-900 dark:border-gray-700; }
+.btn-primary { @apply bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 disabled:opacity-50; }
+.btn-secondary { @apply bg-gray-200 dark:bg-gray-800 dark:text-gray-200 text-gray-800 px-3 py-1 rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-700; }
+textarea.input { @apply resize-none font-mono; }
+/* Toast styles */
+.toast { @apply px-4 py-2 rounded shadow text-sm font-medium; }
+.toast-success { @apply toast bg-green-600 text-white; }
+.toast-error { @apply toast bg-red-600 text-white; }
