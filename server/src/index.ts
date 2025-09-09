@@ -44,15 +44,18 @@ app.post('/api/enter-license', async (req: express.Request, res: express.Respons
     const { licenseKey, deviceTag, hostId } = schema.parse(req.body);
     const activationHost = hostId || `host-${Math.random().toString(36).slice(2)}`;
     const payload = { productId, licenseKey, hostId: activationHost, deviceTag };
-    const actResp = await api.post('/activate-key', payload);
+    // Use new endpoint per docs
+    const actResp = await api.post('/key/activate', payload);
+    // Optionally, fetch entitlements/info
+    // const infoResp = await api.get('/key', { params: { productId, licenseKey } });
     activeLicense = {
       licenseKey,
       hostId: activationHost,
       tier: 'PRO',
       features: ['exportPDF', 'darkMode'],
       lastActivatedAt: new Date().toISOString(),
-      licenseeName: actResp.data.licensee_name,
-      licenseeEmail: actResp.data.licensee_email
+      licenseeName: actResp.data.licenseeName,
+      licenseeEmail: actResp.data.licenseeEmail
     };
     res.json({ message: 'License activated', tier: activeLicense.tier, features: activeLicense.features, hostId: activationHost });
   } catch (e: any) {
